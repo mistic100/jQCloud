@@ -1,26 +1,36 @@
 {
-  "name": "jqcloud2",
-  "version": "2.0.1",
-  "author": [{
-    "name": "Luca Ongaro",
-    "homepage": "http://www.lucaongaro.eu"
-  }, {
-    "name": "Daniel White",
-    "homepage": "http://www.developerdan.com"
-  }, {
-    "name": "Damien \"Mistic\" Sorel",
-    "homepage": "http://www.strangeplanet.fr"
-  }],
-  "description": "jQuery plugin for drawing neat word clouds that actually look like clouds",
+  "name": "jqcloud-npm",
+  "version": "3.0.0",
+  "author": [
+    {
+      "name": "Luca Ongaro",
+      "homepage": "http://www.lucaongaro.eu"
+    },
+    {
+      "name": "Daniel White",
+      "homepage": "http://www.developerdan.com"
+    },
+    {
+      "name": "Damien \"Mistic\" Sorel",
+      "homepage": "http://www.strangeplanet.fr"
+    },
+    {
+      "name": "Andreas Leidig",
+      "homepage": "https://www.github.com/leider"
+    }
+  ],
+  "description": "this fork (leider) is based on the work by \"Mistic\" to make it available on npm and to modernize the build. jQuery plugin for drawing neat word clouds that actually look like clouds",
   "main": "dist/jqcloud.js",
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  },
   "devDependencies": {
-    "qunitjs": "~1.14.0",
+    "qunitjs": "~1.18",
     "grunt": "~0.4.5",
-    "grunt-contrib-qunit": "~0.5.1",
-    "grunt-contrib-uglify": "~0.4.0",
-    "grunt-contrib-cssmin": "~0.9.0",
-    "grunt-contrib-concat": "~0.4.0",
-    "grunt-contrib-jshint": "~0.10.0"
+    "grunt-contrib-less": "~1.0",
+    "grunt-contrib-qunit": "~0.7",
+    "grunt-contrib-uglify": "~0.9",
+    "grunt-eslint": ">= 16.0"
   },
   "keywords": [
     "cloud",
@@ -30,14 +40,21 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/mistic100/jQCloud",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mistic100/jQCloud.git"
-  },
+  "repository": [
+    {
+      "type": "git",
+      "url": "git://github.com/mistic100/jQCloud.git"
+    },
+    {
+      "type": "git",
+      "url": "git://github.com/leider/jQCloud.git"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/mistic100/jQCloud/issues"
   },
   "scripts": {
-    "test": "grunt test --force"
+    "prepublish": "grunt",
+    "test": "grunt"
   }
 }

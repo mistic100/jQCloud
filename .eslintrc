@@ -1,0 +1,16 @@
+{
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "rules": {
+    "camelcase": 0,
+    "quotes": [
+      2,
+      "single"
+    ],
+    "new-cap": 0,
+    "no-sync": 2,
+    "no-use-before-define": [2, "nofunc"]
+  }
+}

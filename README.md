@@ -14,6 +14,10 @@ http://mistic100.github.io/jQCloud
 
 ## Changelog
 
+3.0.0
+- modernizing and streamlining build
+- npm publish
+
 2.0.0
 - Migrate to Grunt builder
 - New documentation

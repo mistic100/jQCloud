@@ -1,15 +1,7 @@
-/*!
- * jQCloud
- * Copyright 2011 Luca Ongaro (http://www.lucaongaro.eu)
- * Copyright 2013 Daniel White (http://www.developerdan.com)
- * Copyright 2014 Damien "Mistic" Sorel (http://www.strangeplanet.fr)
- * Licensed under MIT (http://opensource.org/licenses/MIT)
- */
-
 /*jshint -W055 *//* non standard constructor name */
 
-(function($) {
-  "use strict";
+(function ($) {
+  'use strict';
 
   /*
    * Plugin class
@@ -43,7 +35,7 @@
   jQCloud.DEFAULTS = {
     width: 100,
     height: 100,
-    center: { x: 0.5, y: 0.5 },
+    center: {x: 0.5, y: 0.5},
     steps: 10,
     delay: null,
     shape: 'elliptic',
@@ -58,7 +50,7 @@
   };
 
   jQCloud.prototype = {
-    initialize: function() {
+    initialize: function () {
       // Set/Get dimensions
       if (this.options.width) {
         this.$element.width(this.options.width);
@@ -89,7 +81,7 @@
 
       // Create colorGenerator function from options
       // Direct function
-      if (typeof this.options.colors == 'function') {
+      if (typeof this.options.colors === 'function') {
         this.colorGenerator = this.options.colors;
       }
       // Array of sizes
@@ -98,12 +90,12 @@
         if (cl > 0) {
           // Fill the sizes array to X items
           if (cl < this.options.steps) {
-            for (var i=cl; i<this.options.steps; i++) {
-              this.options.colors[i] = this.options.colors[cl-1];
+            for (var i = cl; i < this.options.steps; i++) {
+              this.options.colors[i] = this.options.colors[cl - 1];
             }
           }
 
-          this.colorGenerator = function(weight) {
+          this.colorGenerator = function (weight) {
             return this.options.colors[this.options.steps - weight];
           };
         }
@@ -111,15 +103,15 @@
 
       // Create sizeGenerator function from options
       // Direct function
-      if (typeof this.options.fontSize == 'function') {
+      if (typeof this.options.fontSize === 'function') {
         this.sizeGenerator = this.options.fontSize;
       }
       // Object with 'from' and 'to'
       else if ($.isPlainObject(this.options.fontSize)) {
-        this.sizeGenerator = function(width, height, weight) {
+        this.sizeGenerator = function (width, height, weight) {
           var max = width * this.options.fontSize.from,
-              min = width * this.options.fontSize.to;
-          return Math.round(min + (max - min) * 1.0 / (this.options.steps-1) * (weight - 1)) + 'px';
+            min = width * this.options.fontSize.to;
+          return Math.round(min + (max - min) * 1.0 / (this.options.steps - 1) * (weight - 1)) + 'px';
         };
       }
       // Array of sizes
@@ -128,12 +120,12 @@
         if (sl > 0) {
           // Fill the sizes array to X items
           if (sl < this.options.steps) {
-            for (var j=sl; j<this.options.steps; j++) {
-              this.options.fontSize[j] = this.options.fontSize[sl-1];
+            for (var j = sl; j < this.options.steps; j++) {
+              this.options.fontSize[j] = this.options.fontSize[sl - 1];
             }
           }
 
-          this.sizeGenerator = function(width, height, weight) {
+          this.sizeGenerator = function (width, height, weight) {
             return this.options.fontSize[this.options.steps - weight];
           };
         }
@@ -145,7 +137,7 @@
       this.clearTimeouts();
 
       // Namespace word ids to avoid collisions between multiple clouds
-      this.data.namespace = (this.$element.attr('id') || Math.floor((Math.random()*1000000)).toString(36)) + '_word_';
+      this.data.namespace = (this.$element.attr('id') || Math.floor((Math.random() * 1000000)).toString(36)) + '_word_';
 
       this.$element.addClass('jqcloud');
 
@@ -159,13 +151,13 @@
 
       // Attach window resize event
       if (this.options.autoResize) {
-        $(window).on('resize', throttle(function() {
+        $(window).on('resize', throttle(function () {
           var new_size = {
             width: this.$element.width(),
             height: this.$element.height()
           };
 
-          if (new_size.width != this.options.width || new_size.height != this.options.height) {
+          if (new_size.width !== this.options.width || new_size.height !== this.options.height) {
             this.options.width = new_size.width;
             this.options.height = new_size.height;
             this.data.aspect_ratio = this.options.width / this.options.height;
@@ -177,8 +169,8 @@
     },
 
     // Helper function to keep track of timeouts so they can be destroyed
-    createTimeout: function(callback, time) {
-      var timeout = setTimeout($.proxy(function(){
+    createTimeout: function (callback, time) {
+      var timeout = setTimeout($.proxy(function () {
         delete this.data.timeouts[timeout];
         callback();
       }, this), time);
@@ -186,17 +178,17 @@
     },
 
     // Destroy all timeouts
-    clearTimeouts: function() {
-      $.each(this.data.timeouts, function(key){
+    clearTimeouts: function () {
+      $.each(this.data.timeouts, function (key) {
         clearTimeout(key);
       });
       this.data.timeouts = {};
     },
 
     // Pairwise overlap detection
-    overlapping: function(a, b) {
-      if (Math.abs(2.0*a.left + a.width - 2.0*b.left - b.width) < a.width + b.width) {
-        if (Math.abs(2.0*a.top + a.height - 2.0*b.top - b.height) < a.height + b.height) {
+    overlapping: function (a, b) {
+      if (Math.abs(2.0 * a.left + a.width - 2.0 * b.left - b.width) < a.width + b.width) {
+        if (Math.abs(2.0 * a.top + a.height - 2.0 * b.top - b.height) < a.height + b.height) {
           return true;
         }
       }
@@ -204,9 +196,9 @@
     },
 
     // Helper function to test if an element overlaps others
-    hitTest: function(elem) {
+    hitTest: function (elem) {
       // Check elements for overlap one by one, stop and return false as soon as an overlap is found
-      for(var i=0, l=this.data.placed_words.length; i<l; i++) {
+      for (var i = 0, l = this.data.placed_words.length; i < l; i++) {
         if (this.overlapping(elem, this.data.placed_words[i])) {
           return true;
         }
@@ -215,7 +207,7 @@
     },
 
     // Initialize the drawing of the whole cloud
-    drawWordCloud: function() {
+    drawWordCloud: function () {
       var i, l;
 
       this.$element.children('[id^="' + this.data.namespace + '"]').remove();
@@ -225,12 +217,12 @@
       }
 
       // Make sure every weight is a number before sorting
-      for (i=0, l=this.word_array.length; i<l; i++) {
+      for (i = 0, l = this.word_array.length; i < l; i++) {
         this.word_array[i].weight = parseFloat(this.word_array[i].weight, 10);
       }
 
       // Sort word_array from the word with the highest weight to the one with the lowest
-      this.word_array.sort(function(a, b) {
+      this.word_array.sort(function (a, b) {
         return b.weight - a.weight;
       });
 
@@ -241,25 +233,25 @@
       // Generate colors
       this.data.colors = [];
       if (this.colorGenerator) {
-        for (i=0; i<this.options.steps; i++) {
-          this.data.colors.push(this.colorGenerator(i+1));
+        for (i = 0; i < this.options.steps; i++) {
+          this.data.colors.push(this.colorGenerator(i + 1));
         }
       }
 
       // Generate font sizes
       this.data.sizes = [];
       if (this.sizeGenerator) {
-        for (i=0; i<this.options.steps; i++) {
-          this.data.sizes.push(this.sizeGenerator(this.options.width, this.options.height, i+1));
+        for (i = 0; i < this.options.steps; i++) {
+          this.data.sizes.push(this.sizeGenerator(this.options.width, this.options.height, i + 1));
         }
       }
 
       // Iterate drawOneWord on every word, immediately or with delay
-      if (this.options.delay > 0){
+      if (this.options.delay > 0) {
         this.drawOneWordDelayed();
       }
       else {
-        for (i=0, l=this.word_array.length; i<l; i++) {
+        for (i = 0, l = this.word_array.length; i < l; i++) {
           this.drawOneWord(i, this.word_array[i]);
         }
 
@@ -270,30 +262,29 @@
     },
 
     // Function to draw a word, by moving it in spiral until it finds a suitable empty place
-    drawOneWord: function(index, word) {
+    drawOneWord: function (index, word) {
       var word_id = this.data.namespace + index,
-          word_selector = '#' + word_id,
 
-          // option.shape == 'elliptic'
-          angle = this.data.angle,
-          radius = 0.0,
+      // option.shape == 'elliptic'
+        angle = this.data.angle,
+        radius = 0.0,
 
-          // option.shape == 'rectangular'
-          steps_in_direction = 0.0,
-          quarter_turns = 0.0,
+      // option.shape == 'rectangular'
+        steps_in_direction = 0.0,
+        quarter_turns = 0.0,
 
-          weight = Math.floor(this.options.steps / 2),
-          word_span,
-          word_size,
-          word_style;
+        weight = Math.floor(this.options.steps / 2),
+        word_span,
+        word_size,
+        word_style;
 
       // Create word attr object
-      word.attr = $.extend({}, word.html, { id: word_id });
+      word.attr = $.extend({}, word.html, {id: word_id});
 
       // Linearly map the original weight to a discrete scale from 1 to 10
       // Only if weights are different
-      if (this.data.max_weight != this.data.min_weight) {
-        weight = Math.round((word.weight - this.data.min_weight) * 1.0 * (this.options.steps-1) / (this.data.max_weight - this.data.min_weight)) + 1;
+      if (this.data.max_weight !== this.data.min_weight) {
+        weight = Math.round((word.weight - this.data.min_weight) * 1.0 * (this.options.steps - 1) / (this.data.max_weight - this.data.min_weight)) + 1;
       }
       word_span = $('<span>').attr(word.attr);
 
@@ -304,12 +295,12 @@
 
       // Apply color
       if (this.data.colors.length) {
-        word_span.css('color', this.data.colors[weight-1]);
+        word_span.css('color', this.data.colors[weight - 1]);
       }
 
       // Apply size
       if (this.data.sizes.length) {
-        word_span.css('font-size', this.data.sizes[weight-1]);
+        word_span.css('font-size', this.data.sizes[weight - 1]);
       }
 
       //Render using template function if provided.
@@ -319,7 +310,7 @@
         // Append link if word.link attribute was set
         // If link is a string, then use it as the link href
         if (typeof word.link === 'string') {
-          word.link = { href: word.link };
+          word.link = {href: word.link};
         }
 
         if (this.options.encodeURI) {
@@ -343,8 +334,8 @@
         width: word_span.outerWidth(),
         height: word_span.outerHeight()
       };
-      word_size.left = this.options.center.x*this.options.width - word_size.width / 2.0;
-      word_size.top = this.options.center.y*this.options.height - word_size.height / 2.0;
+      word_size.left = this.options.center.x * this.options.width - word_size.width / 2.0;
+      word_size.top = this.options.center.y * this.options.height - word_size.height / 2.0;
 
       // Save a reference to the style property, for better performance
       word_style = word_span[0].style;
@@ -352,7 +343,7 @@
       word_style.left = word_size.left + 'px';
       word_style.top = word_size.top + 'px';
 
-      while(this.hitTest(word_size)) {
+      while (this.hitTest(word_size)) {
         // option shape is 'rectangular' so move the word in a rectangular spiral
         if (this.options.shape === 'rectangular') {
           steps_in_direction++;
@@ -362,19 +353,19 @@
             quarter_turns++;
           }
 
-          switch(quarter_turns % 4) {
-            case 1:
-              word_size.left += this.data.step * this.data.aspect_ratio + Math.random() * 2.0;
-              break;
-            case 2:
-              word_size.top -= this.data.step + Math.random() * 2.0;
-              break;
-            case 3:
-              word_size.left -= this.data.step * this.data.aspect_ratio + Math.random() * 2.0;
-              break;
-            case 0:
-              word_size.top += this.data.step + Math.random() * 2.0;
-              break;
+          switch (quarter_turns % 4) {
+          case 1:
+            word_size.left += this.data.step * this.data.aspect_ratio + Math.random() * 2.0;
+            break;
+          case 2:
+            word_size.top -= this.data.step + Math.random() * 2.0;
+            break;
+          case 3:
+            word_size.left -= this.data.step * this.data.aspect_ratio + Math.random() * 2.0;
+            break;
+          case 0:
+            word_size.top += this.data.step + Math.random() * 2.0;
+            break;
           }
         }
         // Default settings: elliptic spiral shape
@@ -382,8 +373,8 @@
           radius += this.data.step;
           angle += (index % 2 === 0 ? 1 : -1) * this.data.step;
 
-          word_size.left = this.options.center.x*this.options.width - (word_size.width / 2.0) + (radius*Math.cos(angle)) * this.data.aspect_ratio;
-          word_size.top = this.options.center.y*this.options.height + radius*Math.sin(angle) - (word_size.height / 2.0);
+          word_size.left = this.options.center.x * this.options.width - (word_size.width / 2.0) + (radius * Math.cos(angle)) * this.data.aspect_ratio;
+          word_size.top = this.options.center.y * this.options.height + radius * Math.sin(angle) - (word_size.height / 2.0);
         }
         word_style.left = word_size.left + 'px';
         word_style.top = word_size.top + 'px';
@@ -409,12 +400,12 @@
     },
 
     // Draw one word then recall the function after a delay
-    drawOneWordDelayed: function(index) {
+    drawOneWordDelayed: function (index) {
       index = index || 0;
 
       // if not visible then do not attempt to draw
       if (!this.$element.is(':visible')) {
-        this.createTimeout($.proxy(function(){
+        this.createTimeout($.proxy(function () {
           this.drawOneWordDelayed(index);
         }, this), 10);
 
@@ -424,19 +415,19 @@
       if (index < this.word_array.length) {
         this.drawOneWord(index, this.word_array[index]);
 
-        this.createTimeout($.proxy(function(){
+        this.createTimeout($.proxy(function () {
           this.drawOneWordDelayed(index + 1);
         }, this), this.options.delay);
       }
       else {
-        if (typeof this.options.afterCloudRender == 'function') {
+        if (typeof this.options.afterCloudRender === 'function') {
           this.options.afterCloudRender.call(this.$element);
         }
       }
     },
 
     // Destroy any data and objects added by the plugin
-    destroy: function() {
+    destroy: function () {
       this.clearTimeouts();
       this.$element.removeClass('jqcloud');
       this.$element.removeData('jqcloud');
@@ -444,7 +435,7 @@
     },
 
     // Update the list of words
-    update: function(word_array) {
+    update: function (word_array) {
       this.word_array = word_array;
       this.data.placed_words = [];
 
@@ -466,10 +457,10 @@
       last: 0
     };
 
-    return function() {
+    return function () {
       var elapsed = new Date().getTime() - state.last,
-          args = arguments,
-          that = this;
+        args = arguments,
+        that = this;
 
       function exec() {
         state.last = new Date().getTime();
@@ -489,12 +480,12 @@
   /*
    * jQuery plugin
    */
-  $.fn.jQCloud = function(word_array, option) {
+  $.fn.jQCloud = function (word_array, option) {
     var args = arguments;
 
     return this.each(function () {
       var $this = $(this),
-          data = $this.data('jqcloud');
+        data = $this.data('jqcloud');
 
       if (!data && word_array === 'destroy') {
         // Don't even try to initialize when called with 'destroy'
@@ -511,10 +502,10 @@
   };
 
   $.fn.jQCloud.defaults = {
-    set: function(options) {
+    set: function (options) {
       $.extend(true, jQCloud.DEFAULTS, options);
     },
-    get: function(key) {
+    get: function (key) {
       var options = jQCloud.DEFAULTS;
       if (key) {
         options = options[key];

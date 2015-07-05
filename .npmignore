@@ -1,0 +1,6 @@
+.*
+Gruntfile.js
+bower.json
+node_modules/
+test/
+src/
