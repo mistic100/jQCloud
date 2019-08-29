@@ -8,7 +8,7 @@ isHome: true
 <section class="bs-docs-section">
   <h1 id="overview" class="page-header">Overview</h1>
 
-  <blockquote>  
+  <blockquote>
     <p>jQCloud is a jQuery plugin that builds neat and pure HTML + CSS word clouds and tag clouds that are actually shaped like a cloud (otherwise, why would we call them 'word clouds'?).</p>
 
     <small>Forked from <a href="https://github.com/lucaong/jQCloud">Luca Ongaro</a></small>
@@ -21,7 +21,6 @@ isHome: true
   </div>
 </section>
 
-
 <section class="bs-docs-section">
   <h1 id="installation" class="page-header">Installation</h1>
 
@@ -31,13 +30,27 @@ isHome: true
 
   <h3 id="includes">Includes</h3>
 
-  <p>Include the Javascript file in your page after jQuery and optionally the CSS file (see <a href="#colors-and-sizes">Colors &amp; sizes</a> section).</p>
+  <p>Include the Javascript file in your html page <code> <head> </code> section after jQuery and optionally the CSS file (see <a href="#colors-and-sizes">Colors &amp; sizes</a> section).</p>
 
-{% highlight html %}
-<script src="bower_components/jqcloud2/dist/jqcloud.min.js"></script>
+  {% highlight html %}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="bower_components/jqcloud2/dist/jqcloud.min.css">
-{% endhighlight %}
+    <script src="bower_components/jqcloud2/dist/jqcloud.min.js"></script>
+
+    <link rel="stylesheet" href="bower_components/jqcloud2/dist/jqcloud.min.css">
+  {% endhighlight %}
+
+  <h3 id="manual">Manual Installation</h3>
+
+  <p>If you don't use Bower, all you need is the <code>dist/jqcloud.min.js</code> file from <a href="https://github.com/mistic100/jQCloud">the repository</a> and optionally the <code>dist/jqcloud.min.css</code> in your project and to include the file(s) in your html page <code> <head> </code> section.</p>
+
+  {% highlight html %}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="your-path-to-file/jqcloud.min.js"></script>
+
+    <link rel="stylesheet" href="your-path-to-file/jqcloud.min.css">
+  {% endhighlight %}
 
   <div class="bs-callout bs-callout-info">
     <div class="media">
@@ -57,8 +70,12 @@ isHome: true
 
   <p>Apply the plugin to a container (preferably a <code>&lt;div&gt;</code>) and provide at least a list of words (see <a href="#words-options">Words options</a> section).</p>
 
-{% highlight javascript %}
-$('#keywords').jQCloud(words);
+{% highlight html %}
+<div id="keywords"></div>
+
+<script>
+  $('#keywords').jQCloud(words);
+</script>
 {% endhighlight %}
 
   <div class="bs-callout bs-callout-danger">
@@ -122,10 +139,10 @@ $('#keywords').jQCloud(words);
   <p>You can provide an object of options has second parameter.</p>
 
 {% highlight javascript %}
-$('#keywords').jQCloud(words, {
-  width: 500,
-  height: 350
-});
+  $('#keywords').jQCloud(words, {
+    width: 500,
+    height: 350
+  });
 {% endhighlight %}
 
   <div class="table-responsive">

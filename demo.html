@@ -4,32 +4,47 @@ title: Examples
 ---
 
 <section class="bs-docs-section">
-  <h1 id="overview" class="page-header">Basic</h1>
+  <h1 id="overview" class="page-header">Basic (Detailed)</h1>
 
   <h3 id="simple">No conf</h3>
   <p>Default configuration, no special parameters for words.</p>
-  
+
   <div class="bs-example">
     <div id="demo-simple" class="demo"></div>
   </div>
-{% highlight javascript %}
-var words = [
-  {text: "Lorem", weight: 13},
-  {text: "Ipsum", weight: 10.5},
-  {text: "Dolor", weight: 9.4},
-  {text: "Sit", weight: 8},
-  {text: "Amet", weight: 6.2},
-  {text: "Consectetur", weight: 5},
-  {text: "Adipiscing", weight: 5},
-  /* ... */
-];
+{% highlight html %}
+  <!DOCTYPE html>
+  <html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="jqcloud.min.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jqcloud.min.js"></script>
+  </head>
 
-$('#demo').jQCloud(words);
+  <body>
+    <div id="demo" style="width: 550px; height: 350px;"></div>
+
+    <script type="text/javascript">
+      var words = [
+        {text: "Lorem", weight: 13},
+        {text: "Ipsum", weight: 10.5},
+        {text: "Dolor", weight: 9.4},
+        {text: "Sit", weight: 8},
+        {text: "Amet", weight: 6.2},
+        {text: "Consectetur", weight: 5},
+        {text: "Adipiscing", weight: 5},
+        /* ... */
+      ];
+
+      $('#demo').jQCloud(words);
+    </script>
+  </body>
+  </html>
 {% endhighlight %}
 
   <h3 id="link">Links</h3>
   <p>The three biggest words have links.</p>
-  
+
   <div class="bs-example">
     <div id="demo-link" class="demo"></div>
   </div>
