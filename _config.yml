@@ -37,20 +37,20 @@ githubButton:
 
 # twitter buttons
 twitter:
-  enabled: true
-  via: mistic100
+  enabled: false
+  via:
   hash:
   account:
 
 # facebook buttons
 facebook:
-  enabled: true
+  enabled: false
   profileUrl:
 
 # google analytics
 analytics:
-  account: UA-28192323-3
-  domain: mistic100.github.io
+  account:
+  domain:
 
 
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'bower.json']
